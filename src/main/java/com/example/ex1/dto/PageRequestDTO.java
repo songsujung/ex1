@@ -46,12 +46,6 @@ public class PageRequestDTO {
         return (this.page - 1) * this.size;
     }
 
-    // limit에 들어 갈 end 계산
-    // 예시) page가 3(페이지)이고, size가 10이면 30 => 3페이지 게시판 끝번호가 ~30번
-    public int getEnd() {
-        return (this.page * this.size);
-    }
-
     // next 버튼을 위한 count 구하기
     // 예시) page=9, size=10이면, (9/10.0 = 0.9, 올림(ceil)처리해서 = 1) * (10 * 10 =100) = 100
     // result = 100이고, +1 => 101개

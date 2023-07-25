@@ -10,7 +10,7 @@
         select * from tbl_boardex
         where bno > 0
         order by bno desc
-        limit #{skip}, #{end}
+        limit #{skip}, #{size}
     </select>
 
     <!--  게시판 next버튼 total  -->
