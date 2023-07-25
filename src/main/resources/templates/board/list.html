@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/boardLayout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>List Page</title>
+</head>
+<body>
+
+
+<div layout:fragment="content">
+    <div class="container-fluid">
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">LIST</h6>
+            </div>
+            <form class="list" method="get" action="/board/list">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered boardTable" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>bno</th>
+                                <th>title</th>
+                                <th>writer</th>
+                                <th>regDate</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="list: ${boardList}">
+                                <td th:text="${list.bno}" th:data-bno="${list.bno}"></td>
+                                <td th:text="${list.title}" th:data-bno="${list.bno}"></td>
+                                <td th:text="${list.writer}" th:data-bno="${list.bno}"></td>
+                                <td th:text="${list.regDate}" th:data-bno="${list.bno}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="/board/regist" class="btn btn-primary">Register</a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+</div>
+
+<script layout:fragment="script" th:inline="javascript">
+
+    const board = document.querySelector(".boardTable")
+
+    const actionForm = document.querySelector(".list")
+
+    board.addEventListener("click", (e) => {
+
+        e.preventDefault() // 기본값 설정
+        e.stopPropagation() // 기본값 설정
+
+        console.log(e.target)
+
+        const target = e.target
+
+        const bno = target.getAttribute("data-bno")
+
+        console.log("bno :" + bno)
+
+        actionForm.setAttribute("action", `/board/read/${bno}`)
+
+        actionForm.submit()
+    })
+
+
+
+</script>
+
+
+</body>
+</html>

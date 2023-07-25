@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/boardLayout.html}">
+<head>
+  <meta charset="UTF-8">
+  <title>Read Page</title>
+</head>
+<body>
+<div class="container-fluid pt-4 px-4" layout:fragment="content">
+  <!--/* [[${boardRead}]] */-->
+  <div class="col-sm-12 col-xl-12">
+    <div class="bg-light rounded h-100 p-4">
+      <h2 class="mb-4">Board Read</h2>
+      <hr>
+      <form class="read" method="post" action="/board/read">
+        <h4 class="mb-4">bno</h4>
+        <div class="alert alert-light" role="alert">[[${read.bno}]]</div>
+        <h4 class="mb-4">title</h4>
+        <div class="alert alert-light" role="alert">[[${read.title}]]</div>
+        <h4 class="mb-4">content</h4>
+        <div class="alert alert-light" role="alert">[[${read.content}]]</div>
+        <h4 class="mb-4">writer</h4>
+        <div class="alert alert-light" role="alert">[[${read.writer}]]</div>
+        <h4 class="mb-4">UpdateDate</h4>
+        <div class="alert alert-light" role="alert">[[${read.updateDate}]]</div>
+        <div class="button_wrap">
+
+          <!--  절대경로로 해주기  -->
+          <a class="btn btn-dark" href="/board/list">LIST</a>
+          <button class="btn btn-primary btnModify">Modify</button>
+          <button class="btn btn-danger btnDelete">Delete</button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script layout:fragment="script" th:inline="javascript">
+
+  const button1 = document.querySelector(".btnModify");
+
+  const button2 = document.querySelector(".btnDelete");
+
+  const actionFrom = document.querySelector(".read");
+
+  const {bno} = [[${read}]] // 구조분해 할당
+
+  // const bno = [[${read.bno}]]
+
+  console.log(bno)
+
+
+  // 수정
+  button1.addEventListener("click", (e) => {
+
+    actionFrom.setAttribute("action", `/board/modify/${bno}`)
+    actionFrom.setAttribute("method", "get")
+    actionFrom.submit()
+
+  })
+
+  // 삭제
+  button2.addEventListener("click", (e) => {
+
+    actionFrom.setAttribute("action", `/board/delete/${bno}`)
+    actionFrom.submit()
+  })
+
+
+</script>
+
+</body>
+</html>

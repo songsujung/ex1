@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/boardLayout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Page</title>
+</head>
+<body>
+<div class="container-fluid pt-4 px-4" layout:fragment="content">
+    <div class="col-sm-12 col-xl-12">
+        <div class="bg-light rounded h-100 p-4">
+            <h2 class="mb-4">Board Register</h2>
+            <form class="register" method="post">
+                <div class="mb-3">
+                    <label for="boardTitle" class="form-label">title</label>
+                    <input type="text" name="title" class="form-control" id="boardTitle">
+                </div>
+                <div class="mb-3">
+                    <label for="boardContent" class="form-label">content</label>
+                    <input type="text" name="content" class="form-control" id="boardContent">
+                </div>
+                <div class="mb-3">
+                    <label for="boardWriter" class="form-label">writer</label>
+                    <input type="text" name="writer" class="form-control" id="boardWriter">
+                </div>
+            </form>
+            <div class="button_wrap">
+                <button class="btn btn-primary btnRegister">Register</button>
+                <a href="/board/list" class="btn btn-danger">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script layout:fragment="script" th:inline="javascript">
+
+    const register = document.querySelector(".btnRegister");
+
+    const actionFrom = document.querySelector(".register");
+
+    register.addEventListener("click", (e) => {
+        actionFrom.submit()
+    })
+
+</script>
+</body>
+</html>

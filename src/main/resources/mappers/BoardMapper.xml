@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.ex1.mappers.BoardMapper">
+
+    <!-- 목록  -->
+    <select id="boardList" resultType="com.example.ex1.dto.BoardDTO" parameterType="com.example.ex1.dto.BoardDTO">
+        select * from tbl_boardex
+        where bno > 0
+        order by bno desc
+        limit 0, 10
+    </select>
+
+    <!-- 등록  -->
+    <insert id="register">
+        insert into tbl_boardex(title, content, writer)
+        values (#{title}, #{content}, #{writer})
+        <selectKey resultType="long" keyProperty="bno" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <!-- 조회  -->
+    <select id="read">
+        select * from tbl_boardex
+        where bno = #{bno}
+    </select>
+
+    <!-- 삭제  -->
+    <delete id="delete">
+        delete from tbl_boardex
+        where bno = #{bno}
+    </delete>
+
+    <!-- 수정  -->
+    <update id="modify">
+        update tbl_boardex set title=#{title}, content=#{content}, updateDate=now()
+        where bno=#{bno}
+    </update>
+
+
+</mapper>

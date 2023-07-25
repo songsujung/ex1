@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/boardLayout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Read Page</title>
+</head>
+<body>
+<div class="container-fluid pt-4 px-4" layout:fragment="content">
+    <!--/* [[${boardRead}]] */-->
+    <div class="col-sm-12 col-xl-12">
+        <div class="bg-light rounded h-100 p-4">
+            <h2 class="mb-4">Board Read</h2>
+            <hr>
+            <form class="modify" method="post" action="/board/modify">
+                <h4 class="mb-4">bno</h4>
+                <input class="alert alert-light" name="bno" role="alert" readonly th:value="${board.bno}">
+                <h4 class="mb-4">title</h4>
+                <input class="alert alert-light" name="title" role="alert" th:value="${board.title}">
+                <h4 class="mb-4">content</h4>
+                <input class="alert alert-light" name="content" role="alert" th:value="${board.content}">
+                <h4 class="mb-4">writer</h4>
+                <input class="alert alert-light" name="writer" role="alert" readonly th:value="${board.writer}">
+                <div class="button_wrap">
+
+                    <!--  절대경로로 해주기  -->
+
+                    <button class="btn btn-primary btnModify">Modify</button>
+                    <a class="btn btn-dark" href="/board/list">Cancel</a>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script layout:fragment="script" th:inline="javascript">
+
+    const button = document.querySelector(".btnModify")
+
+    const actionFrom = document.querySelector(".modify")
+
+    const {bno} = [[${bno}]]
+
+    console.log(bno)
+
+    button.addEventListener("click", (e) => {
+        actionFrom.submit()
+    })
+
+
+
+</script>
+
+</body>
+</html>
