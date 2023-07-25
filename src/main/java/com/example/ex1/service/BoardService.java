@@ -1,6 +1,8 @@
 package com.example.ex1.service;
 
 import com.example.ex1.dto.BoardDTO;
+import com.example.ex1.dto.PageRequestDTO;
+import com.example.ex1.dto.PageResponseDTO;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.List;
 public interface BoardService {
 
     // 목록
-    List<BoardDTO> boardList(BoardDTO boardDTO);
+    PageResponseDTO<BoardDTO> boardList(PageRequestDTO pageRequestDTO);
 
     // 등록
     int register(BoardDTO boardDTO);

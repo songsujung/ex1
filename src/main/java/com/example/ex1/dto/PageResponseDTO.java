@@ -10,10 +10,10 @@ import java.util.List;
 public class PageResponseDTO<E> {
 
     private List<E> list; // 리스트 출력해줄 List
-    private Long total; // PageRequestDTO에서 getCountEnd를 담을 변수
+    private long total; // PageRequestDTO에서 getCountEnd를 담을 변수
 
     @Builder(builderMethodName = "withAll")
-    public PageResponseDTO(List<E> list, Long total) {
+    public PageResponseDTO(List<E> list, long total) {
         this.list = list;
         this.total = total;
     }

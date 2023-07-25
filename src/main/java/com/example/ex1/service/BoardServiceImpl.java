@@ -1,6 +1,8 @@
 package com.example.ex1.service;
 
 import com.example.ex1.dto.BoardDTO;
+import com.example.ex1.dto.PageRequestDTO;
+import com.example.ex1.dto.PageResponseDTO;
 import com.example.ex1.mappers.BoardMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,11 +17,17 @@ public class BoardServiceImpl implements BoardService{
 
     // 목록
     @Override
-    public List<BoardDTO> boardList(BoardDTO boardDTO) {
+    public PageResponseDTO<BoardDTO> boardList(PageRequestDTO pageRequestDTO) {
 
-        List<BoardDTO> list = boardMapper.boardList(boardDTO);
+        // 리스트값
+        List<BoardDTO> boardList = boardMapper.boardList(pageRequestDTO);
 
-        return list;
+        // total값
+        long total = boardMapper.total(pageRequestDTO);
+
+        // return타입을 선언해주고 build로 담아주기
+        return PageResponseDTO.<BoardDTO>withAll()
+                .list(boardList).total(total).build();
     }
 
     // 등록

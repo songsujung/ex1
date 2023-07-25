@@ -1,6 +1,8 @@
 package com.example.ex1.controller;
 
 import com.example.ex1.dto.BoardDTO;
+import com.example.ex1.dto.PageRequestDTO;
+import com.example.ex1.dto.PageResponseDTO;
 import com.example.ex1.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -24,9 +26,9 @@ public class BoardController {
 
     // 목록
     @GetMapping("list")
-    public void boardlist(BoardDTO boardDTO, Model model) {
+    public void boardlist(PageRequestDTO pageRequestDTO, Model model) {
 
-        List<BoardDTO> list = boardService.boardList(boardDTO);
+        PageResponseDTO<BoardDTO> list = boardService.boardList(pageRequestDTO);
 
         model.addAttribute("boardList", list);
     }
