@@ -10,16 +10,16 @@
         select * from tbl_boardex
         where bno > 0
         order by bno desc
-        limit #{skip}, #{end})
+        limit #{skip}, #{end}
     </select>
 
     <!--  게시판 next버튼 total  -->
-    <select id="listCount" resultType="long">
+    <select id="total" resultType="long">
         select count(*)
         from
         (select bno from tbl_boardex
         where bno > 0
-        limit #{countEnd}
+        limit #{countEnd}) board
     </select>
 
     <!--  등록  -->

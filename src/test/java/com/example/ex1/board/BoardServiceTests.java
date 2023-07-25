@@ -1,6 +1,7 @@
 package com.example.ex1.board;
 
 import com.example.ex1.dto.BoardDTO;
+import com.example.ex1.dto.PageRequestDTO;
 import com.example.ex1.mappers.BoardMapper;
 import com.example.ex1.service.BoardService;
 import lombok.extern.log4j.Log4j2;
@@ -20,10 +21,10 @@ public class BoardServiceTests {
     @Test
     public void testListService() {
 
-        BoardDTO boardDTO = BoardDTO.builder().build();
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder().build();
 
         log.info("======================================");
-        log.info(boardService.boardList(boardDTO));
+        log.info(boardService.boardList(pageRequestDTO));
     }
 
     // 등록
