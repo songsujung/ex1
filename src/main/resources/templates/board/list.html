@@ -38,12 +38,19 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="btn-toolbar" role="toolbar" style="justify-content: center;">
+                        <!--/*  paging  */-->
+                        <div class="btn-group me-2 paging" role="group" aria-label="First group"></div>
+                    </div>
                     <a href="/board/regist" class="btn btn-primary">Register</a>
+                    <input type="hidden" name="page" th:value="${pageRequestDTO.page}">
+                    <input type="hidden" name="size" th:value="${pageRequestDTO.size}">
                 </div>
             </form>
         </div>
 
     </div>
+    <script src="/js/paging.js"></script>
     <!-- /.container-fluid -->
 </div>
 
@@ -53,6 +60,42 @@
 
     const actionForm = document.querySelector(".list")
 
+    const paging = document.querySelector(".paging")
+
+    const pageObj = document.querySelector("input[name=page]")
+
+    // page,size 값 구조분해 할당
+    const {page, size} = [[${pageRequestDTO}]]
+
+    // total 값 저장
+    const {total} = [[${boardList}]]
+
+    // paging 동적으로 생성
+    const pageList = makePages(page, size, total)
+    paging.innerHTML = pageList
+
+    // paging 이동 버튼
+    paging.addEventListener("click", (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+
+        // target 찾기
+        const target = e.target
+
+        // paging번호 가져오기
+        const pageNum = target.getAttribute("href")
+
+        // paging값 넘겨주기
+        pageObj.value = pageNum
+
+        // actionForm submit
+        actionForm.setAttribute("action", "/board/list")
+        actionForm.submit()
+
+    }, false); // 캡처링
+
+
+    // 게시판 상세페이지로 이동(조회)
     board.addEventListener("click", (e) => {
 
         e.preventDefault() // 기본값 설정
