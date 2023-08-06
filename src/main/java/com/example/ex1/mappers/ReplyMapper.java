@@ -2,10 +2,12 @@ package com.example.ex1.mappers;
 
 import com.example.ex1.dto.PageRequestDTO;
 import com.example.ex1.dto.ReplyDTO;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+@Mapper
 public interface ReplyMapper {
 
     // list
