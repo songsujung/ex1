@@ -21,7 +21,6 @@ public class ReplyServiceImpl implements ReplyService{
     // list
     @Override
     public PageResponseDTO<ReplyDTO> getList(Integer bno, PageRequestDTO pageRequestDTO) {
-        pageRequestDTO.setSize(30);
         return null;
     }
 
