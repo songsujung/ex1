@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 @Service
 @Log4j2
@@ -21,7 +22,31 @@ public class ReplyServiceImpl implements ReplyService{
     // list
     @Override
     public PageResponseDTO<ReplyDTO> getList(Integer bno, PageRequestDTO pageRequestDTO) {
-        return null;
+
+        //30개씩 불러오게 사이즈 조정
+        pageRequestDTO.setSize(30);
+
+        //total
+        int total = replyMapper.getBnoCount(bno);
+
+        //page번호
+        int pageNum = pageRequestDTO.getPage();
+
+        //끝페이지 계산
+        if(!pageRequestDTO.isReplyLast()){
+            //페이지 넘버에 넣어주기
+            pageNum = (int) (Math.ceil(total/(double)pageRequestDTO.getSize()));
+
+            //페이지번호가 0보다 작거나 같으면 1로 설정
+            pageNum = pageNum <= 0 ? 1 : pageNum;
+        }
+        //끝페이지 번호로 설정
+        pageRequestDTO.setPage(pageNum);
+
+        //list
+        List<ReplyDTO> list = replyMapper.getList(bno, pageRequestDTO);
+
+        return null; // ing
     }
 
     // register

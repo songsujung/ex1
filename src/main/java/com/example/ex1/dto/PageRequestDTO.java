@@ -2,23 +2,21 @@ package com.example.ex1.dto;
 
 // 페이지 번호와 페이지 사이즈를 구하는 DTO
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
+@Data
 @Builder
 public class PageRequestDTO {
 
+    // 변수 선언
     // @Builder.Default : 특정 필드를 특정 값으로 초기화
     @Builder.Default
     private int page = 1; // 페이지 번호
-
     @Builder.Default
     private int size = 10; // 페이지 사이즈
+    private boolean replyLast; //댓글 페이징 마지막 페이지 유무
 
     // 페이지 번호
     // page가 0보다 작으면 1로 설정, 아니면 그 페이지값으로 설정(페이지번호가 마이너스로 뜨지 않게 하기 위해)
