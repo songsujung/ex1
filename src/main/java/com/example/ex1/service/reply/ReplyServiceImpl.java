@@ -46,7 +46,11 @@ public class ReplyServiceImpl implements ReplyService{
         //list
         List<ReplyDTO> list = replyMapper.getList(bno, pageRequestDTO);
 
-        return null; // ing
+        return PageResponseDTO.<ReplyDTO>withAll()
+        .list(list)
+        .total(total)
+        .pageRequestDTO(pageRequestDTO)
+        .build();
     }
 
     // register
